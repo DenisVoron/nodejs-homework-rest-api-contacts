@@ -8,6 +8,8 @@ const {
   patchValidation
 } = require('../../middlewares/walidationMiddleware');
 
+const { asyncWrapper } = require('../../helpers')
+
 const {
   getContacts,
   getContactsById,
@@ -17,11 +19,11 @@ const {
   deleteContact
 } = require('../../controllers/contacts');
 
-router.get('/', getContacts);
-router.get('/:contactId', getContactsById);
-router.post('/', postValidation, addContact);
-router.put('/:contactId', putValidation, updateContactById);
-router.patch('/:contactId/favorite', patchValidation, updateFavorite);
-router.delete('/:contactId', deleteContact);
+router.get('/', asyncWrapper(getContacts));
+router.get('/:contactId', asyncWrapper(getContactsById));
+router.post('/', postValidation, asyncWrapper(addContact));
+router.put('/:contactId', putValidation, asyncWrapper(updateContactById));
+router.patch('/:contactId/favorite', patchValidation, asyncWrapper(updateFavorite));
+router.delete('/:contactId', asyncWrapper(deleteContact));
 
 module.exports = router;
