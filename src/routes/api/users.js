@@ -5,14 +5,14 @@ const router = express.Router();
 const { asyncWrapper } = require('../../helpers')
 
 const {
+    registValidation,
+    loginValidation
+} = require('../../middlewares');
+
+const {
     register,
     login
 } = require('../../controllers/users');
-
-const {
-    registValidation,
-    loginValidation
-} = require('../../middlewares/authValidationMiddleware');
 
 // const { schemas } = require('../../models/user');
 
