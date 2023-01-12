@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User } = require('../../models/user');
 const { HttpError } = require('../../helpers');
+// const { findByIdAndUpdate } = require('../../models/contacts');
 
 // const {JWT_SECRET}= process.env;
 
@@ -24,6 +25,7 @@ const login = async (req, res) => {
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '23h' });
+    await User.findByIdAndUpdate(user._id, { token });
 
     res.json({
         token: token,
