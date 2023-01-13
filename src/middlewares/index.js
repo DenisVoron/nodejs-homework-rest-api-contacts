@@ -2,7 +2,7 @@ const {
     postValidation,
     putValidation,
     patchValidation
-} = require('./walidationMiddleware');
+} = require('./validationMiddleware');
 
 const {
     registValidation,
