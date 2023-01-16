@@ -7,7 +7,8 @@ const { asyncWrapper } = require('../../helpers')
 const {
     registValidation,
     loginValidation,
-    authenticate
+    authenticate,
+    upload
 } = require('../../middlewares');
 
 const {
@@ -15,11 +16,13 @@ const {
     login,
     getCurrent,
     logout,
+    updateAvatar
 } = require('../../controllers/users');
 
 router.post('/signup', registValidation, asyncWrapper(register));
 router.post('/login', loginValidation, asyncWrapper(login));
 router.get('/current', authenticate, asyncWrapper(getCurrent));
 router.get('/logout', authenticate, asyncWrapper(logout));
+router.patch('/avatars', authenticate, upload.single('avatar'), asyncWrapper(updateAvatar));
 
 module.exports = router;
