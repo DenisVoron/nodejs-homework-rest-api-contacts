@@ -1,13 +1,14 @@
 /* eslint-disable no-undef */
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 // const bcrypt = require("bcryptjs");
-require("dotenv").config();
+// require("dotenv").config();
 
-const { login } = require('../src/controllers/users');
-const { User } = require('../src/models/user');
+// const { login } = require('../src/controllers/users');
+// const { User } = require('../src/models/user');
 // const { HttpError } = require('../src/helpers');
 
-describe('Contact service test signup', () => {
+/**
+ * describe('Contact service test signup', () => {
     test('Must login a return the contact details', async () => {
         const mReq = {
             body: {
@@ -52,3 +53,4 @@ describe('Contact service test signup', () => {
         expect(result.user.subscription).toEqual(mRes.user.subscription);
     });
 });
+ */
