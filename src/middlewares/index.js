@@ -10,6 +10,7 @@ const {
 } = require('./authValidationMiddleware');
 
 const authenticate = require('./authenticate');
+const upload = require('./upload');
 
 module.exports = {
     postValidation,
@@ -18,4 +19,5 @@ module.exports = {
     authenticate,
     registValidation,
     loginValidation,
+    upload,
 }

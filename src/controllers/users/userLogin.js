@@ -2,7 +2,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User } = require('../../models/user');
 const { HttpError } = require('../../helpers');
-// const { findByIdAndUpdate } = require('../../models/contacts');
 
 // const {JWT_SECRET}= process.env;
 
