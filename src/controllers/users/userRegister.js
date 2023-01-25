@@ -2,9 +2,11 @@ const bcrypt = require('bcrypt');
 const gravatar = require('gravatar');
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const { nanoid } = require('nanoid');
 
 const { User } = require('../../models/user');
-const { HttpError } = require('../../helpers');
+const { HttpError, sendEmail } = require('../../helpers');
+const { BASE_URL } = process.env;
 
 
 const register = async (req, res) => {
@@ -16,24 +18,17 @@ const register = async (req, res) => {
 
     const hashPassword = await bcrypt.hash(password, 10);
     const avatarURL = gravatar.url(email);
-    const newUser = await User.create({ ...req.body, password: hashPassword, avatarURL });
+    const verificationToken = nanoid();
 
-    const msg = {
-        to: 'denis.voronko@gmail.com',
-        from: 'denis_vr@meta.ua',
-        subject: 'Thank you for registration',
-        text: 'and easy to do anywhere, even with Node.js',
-        html: '<h1>and easy to do anywhere, even with Node.js</h1>',
+    const newUser = await User.create({ ...req.body, password: hashPassword, avatarURL, verificationToken });
+
+    const verifyEmail = {
+        to: email,
+        subject: 'Verify email',
+        html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">Click verify email</a>`,
     }
 
-    sgMail
-        .send(msg)
-        .then(() => {
-            console.log('Email sent')
-        })
-        .catch((error) => {
-            console.error(error)
-        })
+    await sendEmail(verifyEmail);
 
     res.status(201).json({
         email: newUser.email,
