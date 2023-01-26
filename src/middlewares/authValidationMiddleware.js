@@ -32,5 +32,18 @@ module.exports = {
         }
 
         next();
+    },
+
+    resendingValidation: (req, res, next) => {
+        const schema = Joi.object({
+            email: Joi.string().required(),
+        })
+
+        const validationResult = schema.validate(req.body);
+        if (validationResult.error) {
+            return res.status(400).json({ message: "missing required field email" })
+        }
+
+        next();
     }
 }
