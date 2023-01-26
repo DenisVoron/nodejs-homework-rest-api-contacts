@@ -7,6 +7,7 @@ const {
 const {
     registValidation,
     loginValidation,
+    resendingValidation,
 } = require('./authValidationMiddleware');
 
 const authenticate = require('./authenticate');
@@ -19,5 +20,6 @@ module.exports = {
     authenticate,
     registValidation,
     loginValidation,
+    resendingValidation,
     upload,
 }
